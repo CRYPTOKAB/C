@@ -22,12 +22,13 @@ SAFE_GLOBALS = {
     'round': round,
 }
 
-app = Flask(__name__, static_folder='static', template_folder='templates') # Define static folder
+# --- FIX: Set template_folder to '.' (the current directory) ---
+app = Flask(__name__, static_folder='static', template_folder='.')
 
 @app.route('/')
 def serve_index():
     """Serves the main HTML page."""
-    # Note: Flask looks for index.html in a 'templates' folder by default.
+    # Flask will now look for index.html in the project root.
     return render_template('index.html')
 
 @app.route('/api/calc', methods=['POST'])
